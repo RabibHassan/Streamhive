@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watchlist</title>
+    <title>Subscriptions - Tunify</title>
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -41,21 +41,55 @@
             </div>
         </details>
     </header>
-
+    
     <main>
-        <h2>Watchlists</h2>
-        @foreach ($records as $records)
-        <section id="playlists">
-            <div class="playlist-container">
-                <div class="playlist">
-                    <h3>{{$records->m_name}}</h3>
+        <section id="subscriptions">
+            <h1>Choose Your Subscription Plan</h1>
+            <div class="subscription-container">
+                
+                <div class="subscription">
+                    <h2>Free</h2>
+                    <p>Price: <strong>0 TAKA</strong></p>
+                    <ul>
+                        <li>Access to basic features</li>
+                        <li>Ads included</li>
+                        <li>Limited skips</li>
+                    </ul>
+                    <form method="post" action="update_subscription.php">
+                        <button type="submit" name="plan" value="free">Select Free Plan</button>
+                    </form>
                 </div>
-            </section>
-        @endforeach
-    </main>
 
-    <footer>
-        <p>&copy; 2024 StreamHive. All rights reserved.</p>
-    </footer>
+               
+                <div class="subscription">
+                    <h2>Individual</h2>
+                    <p>Price: <strong>100 TAKA/month</strong></p>
+                    <ul>
+                        <li>Ad-free music</li>
+                        <li>Unlimited skips</li>
+                        <li>Offline listening</li>
+                    </ul>
+                    <form method="post" action="update_subscription.php">
+                        <button type="submit" name="plan" value="individual">Select Individual Plan</button>
+                    </form>
+                </div>
+
+                
+                <div class="subscription">
+                    <h2>Family</h2>
+                    <p>Price: <strong>250 TAKA/month</strong></p>
+                    <ul>
+                        <li>Ad-free music</li>
+                        <li>Unlimited skips</li>
+                        <li>Offline listening</li>
+                        <li>For up to 6 accounts</li>
+                    </ul>
+                    <form method="post" action="update_subscription.php">
+                        <button type="submit" name="plan" value="family">Select Family Plan</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
