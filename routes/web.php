@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchlistController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ Route::get('/subscription',function(){
 Route::post('/login',[UserController::class,'login']);
 
 Route::post('/signup',[UserController::class,'signup']);
+
+Route::post('/logout',[UserController::class,'logout']);
 
 Route::post('/addwatchlist',[WatchlistController::class,'addwatchlist'])->name('addwatchlist');
 
