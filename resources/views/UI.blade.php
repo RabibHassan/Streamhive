@@ -63,7 +63,11 @@
             </summary>
             <div class="dropdown">
                 <a href="profile.php">Profile</a>
-                <a href="logout.php">Logout</a>
+                <form action="/logout" method="POST">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Logout</button>
+                </form>
             </div>
         </details>
     </header>
