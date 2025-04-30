@@ -54,7 +54,8 @@
         @endforeach
     </main>
 
-    <footer>
+    <footer style="text-align: center; padding: 20px; background-color: #1a1a1a; color: white;margin-top: 20px;bottom:0; width: 100%;">
+        <p>StreamHive &copy; 2024</p>
         <p>&copy; 2024 StreamHive. All rights reserved.</p>
     </footer>
 </body>

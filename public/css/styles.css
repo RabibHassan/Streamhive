@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    background-color: #1db954;
+    background-color:  #1a71a3;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -53,7 +53,7 @@ header {
 }
 
 .search-bar button {
-    background-color: #1db954;
+    background-color: #1a71a3;
     color: #ffffff;
     border: none;
     padding: 5px 15px;
@@ -63,7 +63,7 @@ header {
 }
 
 .search-bar button:hover {
-    background-color: #14863d;
+    background-color: #1a71a3;
 }
 
 /* Navigation */
@@ -85,14 +85,14 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #1db954;
+    color: #1a71a3;
 }
 
 nav ul li a::after {
     content: '';
     display: block;
     height: 2px;
-    background: #1db954;
+    background:#1a71a3;
     width: 0;
     transition: width 0.4s;
     position: absolute;
@@ -131,7 +131,7 @@ nav ul li a:hover::after {
 }
 
 .btn {
-    background-color: #1db954;
+    background-color: #1a71a3;
     color: #ffffff;
     padding: 10px 20px;
     border-radius: 25px;
@@ -140,7 +140,7 @@ nav ul li a:hover::after {
 }
 
 .btn:hover {
-    background-color: #1aa34a;
+    background-color:#1a71a3;
 }
 
 /* Main Content */
@@ -154,7 +154,7 @@ section {
 
 h1, h2 {
     margin-bottom: 20px;
-    color: #1db954;
+    color: #1a71a3;
     text-align: center;
 }
 
@@ -212,7 +212,7 @@ footer p {
 #top-charts h2, #recommendations h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #1db954;
+    color: #1a71a3;
 }
 
 .charts-container, .recommendations-container {
@@ -341,7 +341,7 @@ footer p {
 
 button.glider-prev, 
 button.glider-next {
-    background-color: #1db954;
+    background-color: #1a71a3;
     color: white;
     border: none;
     border-radius: 50%;
@@ -363,7 +363,7 @@ button.glider-next {
 
 button.glider-prev:hover, 
 button.glider-next:hover {
-    background-color: #1db954;
+    background-color: #1a71a3;
 }
 
 #dots {
@@ -417,7 +417,7 @@ button.glider-next:hover {
 .option-icon{
     font-family: 'Montserrat', sans-serif;;
     border: none;
-    background-color: #1db954;
+    background-color: #1a71a3;
     color: #ffffff;
     width: 80px;
     height: 30px;
@@ -443,7 +443,7 @@ button.glider-next:hover {
 .s_plan{
     font-family: 'Montserrat', sans-serif;;
     border: none;
-    background-color: #1db954;
+    background-color: #1a71a3;
     color: #ffffff;
     width: 110px;
     height: 55px;

@@ -36,7 +36,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             text-align: center;
             z-index: 1; 
-
+        }
         .container input {
             width: 96%;
             padding: 11px;
