@@ -123,6 +123,20 @@ class AdminController extends Controller
         return redirect('/admin_series')->with('message', 'Series Added Successfully');
     }
 
+    public function deleteuser($id){
+        // Delete related subscriptions first
+        Subscription::where('users_id', $id)->delete();
+    
+        // Then delete the user
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return redirect('/admin')->with('message', 'User Deleted Successfully');
+        } else {
+            return redirect('/admin')->with('message', 'User Not Found');
+        }
+    }
+
     public function deletemovie($id){
         $movie = Movie::find($id);
         if ($movie) {
