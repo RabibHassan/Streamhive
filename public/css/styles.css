@@ -452,6 +452,13 @@ button.glider-next:hover {
     margin-top: 10px;
 }
 
+.s_plan:hover{
+    background-color: #1a71a3;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
 .s_type{
     display: flex;
     justify-content: center;
@@ -604,4 +611,23 @@ button.glider-next:hover {
     border-radius: 5px;
     margin-left: 70px;
     margin-top: 5px;
+}
+
+.delete_butt{
+    font-family: 'Montserrat', sans-serif;;
+    border: none;
+    background-color: rgb(223, 57, 57);
+    color: #ffffff;
+    width: 110px;
+    height: 55px;
+    border-radius: 5px;
+    margin-left: 25px;
+}
+
+.delete_butt:hover{
+    background-color: rgb(180, 166, 166);
+    color: rgb(223, 57, 57);
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }

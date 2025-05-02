@@ -20,7 +20,7 @@ class UserController extends Controller
         ]);
         $incoming_fields['password'] = bcrypt($incoming_fields['password']);
         $user=User::create(['role' => 'user', 'name' => $incoming_fields['name'], 'email' => $incoming_fields['email'], 'age' => $incoming_fields['age'], 'password' => $incoming_fields['password']]);
-        Subscription::create(['status' => 'free', 'users_id' => $user->id]);
+        Subscription::create(['status' => 'free', 'users_id' => $user->id,'name'=>$user->name]);
         auth()->login($user);
         return redirect('/login');
     }

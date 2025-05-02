@@ -9,6 +9,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
+
+    <style>
+        select#status {
+            background-color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            border:none;
+            border-radius: 5px;
+            width: 110px;
+            height: 50px;
+            cursor: pointer;
+            text-align: center;
+            text-align-last: center; /* Center text in dropdown */
+        }
+
+        select#status:hover {
+            background-color: #f0f0f0;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .assign-button-item{
+            background-color: #1a71a3;
+            color: white;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 5px;
+            width: 110px;
+            height: 50px;
+            cursor: pointer;
+            text-align: center;
+            text-align-last: center; /* Center text in dropdown */
+        }
+        .assign-button-item:hover {
+            background-color: #f0f0f0;
+            color:#1a71a3;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -31,9 +69,8 @@
             </div>
         </details>
     </header>
-
     <main>
-        <h2 class="section-title">Manage all movies</h2>
+        <h2 class="section-title">Manage user subscriptions</h2>
     <div class="admin-container">
         <div class="admin-options">
             <form action="/admin_go" method="POST">
@@ -62,53 +99,40 @@
                 <thead class="thead-light">
                 <tr>
                     <th class="th1" scope="col">#Serial</th>
-                    <th class="th1" scope="col">Movie Name</th>
-                    <th class="th1" scope="col">Movie Description</th>
-                    <th class="th1" scope="col">Poster</th>
-                    <th class="th1" scope="col">Remove Movie</th>
+                    <th class="th1" scope="col">User's ID</th>
+                    <th class="th1" scope="col">Username</th>
+                    <th class="th1" scope="col">Updated at</th>
+                    <th class="th1" scope="col">Created at</th>
+                    <th class="th1" scope="col">Subscription Status</th>
+                    <th class="th1" scope="col">Change Subscription Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($records as $records)
                     <tr>
                         <th class="th1" scope="row">{{$records->id}}</th>
-                        <td class="td1">{{$records->m_name}}</td>
-                        <td class="td1">{{$records->m_description}}</td>
-                        <td class="td1">
-                            <img src="{{asset($records->img)}}" alt="Movie Poster" style="width: 150px; height: 150px;">
-                        </td>
-                        <td class="td1">
-                            <form action="{{ url('deletemovie/' . $records->id) }}" method="POST">
+                        <td class="td1">{{$records->users_id}}</td>
+                        <td class="td1">{{$records->name}}</td>
+                        <td class="td1">{{$records->updated_at}}</td>
+                        <td class="td1">{{$records->created_at}}</td>
+                        <td class="td1">{{$records->status}}</td>
+                        <td class="td1" style="width: 300px;">
+                            <form action="/admin_change_status" method="POST">
                                 @csrf
-                                @method('DELETE')
-                                <button style="margin-right:25px" type="submit" class="delete_butt">Remove this</button>
+                                @method('PUT')
+                                <input type="hidden" name="users_id" value="{{$records->users_id}}"> 
+                                <select name="status" id="status">
+                                    <option value="free">Free</option>
+                                    <option value="individual">Individual</option>
+                                    <option value="family">Family</option>
+                                </select>
+                                <button type="submit" class="assign-button-item">Change Status</button>
                             </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-        </div>
-        <div>
-            <h2 class="section-title">Add New Movie</h2>
-            <form action="/addmovie" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="input">
-                    <input class="input_bar" type="text" id="id" name="id" placeholder="Movie Number" required>
-                </div>
-                <div class="input">
-                    <input class="input_bar" type="text" id="m_name" name="m_name" placeholder="Movie Name" required>
-                </div>
-                <div class="input">
-                    <input class="input_bar" type="text" id="m_description" name="m_description" placeholder="Movie Description" required>
-                </div>
-                <div class="input">
-                    <input class="input_bar" type="text" id="img" name="img" placeholder="enter image path like 'images/'" required>
-                </div>
-                <div class="input">
-                    <input class="input_bar" type="file" id="img_url" name="img_url" accept="image/*" required>
-                </div>
-                <button class="sb_plan" type="submit">Add Movie</button>
-            </form>
         </div>
     </div>
     </main>

@@ -71,9 +71,9 @@
             </div>
         </details>
     </header>
-    
+    <h2 class="section-title">Watch Popular Movies</h2>
         <div class="glider-container" id="homescroll">
-            <div class="glider">
+            <div class="glider1">
                 <div class="slide">
                     <img src="{{ asset('images/thor.jpg') }}" alt="Image 1">
                     <div class="overlay">
@@ -226,15 +226,157 @@
             <button class="glider-next">»</button>
             <div id="dots"></div>
         </div>
+    <h2 class="section-title">Watch Popular Series</h2>
+        <div class="glider-container" id="homescroll">
+            <div class="glider2">
+                <div class="slide">
+                    <img src="{{ asset('images/peaky_blinders.webp') }}" alt="Image 1">
+                    <div class="overlay">
+                        <h1>Peaky Blinders</h1>
+                        <p>Peaky Blinders is a stylish British crime drama following the ruthless rise of the Shelby family gang in post-World War I Birmingham.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Peaky Blinders"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <a href="profile.php">Watch now</a> 
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="{{ asset('images/dark.jpg') }}" alt="Image 4">
+                    <div class="overlay">
+                        <h1>Dark</h1>
+                        <p>A mind-bending sci-fi thriller that explores time travel, fate, and family secrets as four interconnected families uncover a mystery spanning multiple generations.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Dark"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <a href="profile.php">Watch now</a> 
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="{{ asset('images/game_of_thrones.jpg') }}" alt="Image 2">
+                    <div class="overlay">
+                        <h1>Game of Thrones</h1>
+                        <p>An epic fantasy saga of power, betrayal, and war as noble families vie for control of the Iron Throne in the mythical land of Westeros.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Game of Thrones"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <a href="profile.php">Watch now</a> 
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="{{ asset('images/mindhunter.jpg') }}" alt="Image 3">
+                    <div class="overlay">
+                        <h1>Mindhunter</h1>
+                        <p>Mindhunter is a psychological crime thriller that follows FBI agents as they pioneer criminal profiling by interviewing serial killers to understand how they think.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Mindhunter"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <a href="profile.php">Watch now</a> 
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="{{ asset('images/ozark.jpg') }}" alt="Image 3">
+                    <div class="overlay">
+                        <h1>Ozark</h1>
+                        <p>Ozark is a dark crime drama about a financial advisor who is forced to launder money for a drug cartel, dragging his family into a dangerous criminal underworld.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Ozark"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <a href="profile.php">Watch now</a> 
+                            </div>
+                        </details>
+                    </div>
+                </div>
+        </div>
+        <button class="glider-prev">«</button>
+        <button class="glider-next">»</button>
+        <div id="dots"></div>
+    </div>
     <details class="dropdown">
         <summary>Options</summary>
         <div class="dropdown-menu">
             <a href="#" class="dropdown-item">Add to Watchlist</a>
         </div>
     </details>
+
+    <section class="glider-section">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
         <script>
-            new Glider(document.querySelector('.glider'), {
+            new Glider(document.querySelector('.glider1'), {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                dots: '#dots',
+                draggable: true,
+                arrows: {
+                    prev: '.glider-prev',
+                    next: '.glider-next'
+                },
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }
+                ]
+            });
+
+            new Glider(document.querySelector('.glider2'), {
                 slidesToShow: 4,
                 slidesToScroll: 1,
                 dots: '#dots',

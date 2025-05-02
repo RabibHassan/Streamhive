@@ -15,4 +15,5 @@ class Series extends Model
         's_description',
         'img'
     ];
+
 }

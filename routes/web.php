@@ -88,8 +88,6 @@ Route::get('/admin_movies',[AdminController::class,'fetchMovies'])->name('fetchM
 Route::get('/admin_series',[AdminController::class,'fetchSeries'])->name('fetchSeries')->middleware('auth');
 Route::get('/admin_watchlist',[AdminController::class,'fetchWatchlist'])->name('fetchWatchlist')->middleware('auth');
 
-Route::put('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
-
 Route::get('/movies',[MoviesController::class,'fetchmovies'])->name('movies');
 Route::get('/series',[SeriesController::class,'fetchseries'])->name('series');
 
@@ -106,3 +104,14 @@ Route::post('/addwatchlist',[WatchlistController::class,'addwatchlist'])->name('
 Route::post('/decision',[UserController::class,'decision'])->name('decision');
 
 Route::post('/admin_go',[AdminController::class,'admin_go'])->name('admin_go');
+
+Route::post('/addmovie',[AdminController::class,'addmovie'])->name('addmovie'); 
+Route::post('/addseries',[AdminController::class,'addseries'])->name('addseries');
+
+Route::put('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
+Route::put('/admin_assign_role',[AdminController::class,'admin_assign_role'])->name('admin_assign_role');
+Route::put('/admin_change_status',[AdminController::class,'admin_change_status'])->name('admin_change_status');
+
+Route::delete('deletemovie/{id}',[AdminController::class,'deletemovie'])->name('deletemovie');
+Route::delete('deleteseries/{id}',[AdminController::class,'deleteseries'])->name('deleteseries');
+Route::delete('deleteuser/{id}',[AdminController::class,'deleteuser'])->name('deleteuser');
