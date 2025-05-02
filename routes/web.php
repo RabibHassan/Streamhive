@@ -5,6 +5,7 @@ use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\WatchlistController;
@@ -53,6 +54,47 @@ Route::get('/series',function(){
     return view('series');
 })->name('series');
 
+Route::get('/decisionpage', function(){
+    return view('decisionpage');
+})->middleware('auth');
+
+Route::get('/admin',function(){
+    return view('admin');
+})->middleware('auth');
+
+Route::get('/admin_movies',function(){
+    return view('admin_movies');
+})->middleware('auth');
+
+Route::get('/admin_series',function(){
+    return view('admin_series');
+})->middleware('auth');
+
+Route::get('/admin_watchlist',function(){
+    return view('admin_watchlist');
+})->middleware('auth');
+
+Route::get('/admin_subscription',function(){
+    return view('admin_subscription');
+})->middleware('auth');
+
+Route::get('/watchlist', [WatchlistController::class, 'fetchmovies'])->name('watchlist'); //pt1
+Route::get('/fetchmovies',[WatchlistController::class,'fetchmovies'])->name('fetchmovies');//pt2
+
+Route::get('/admin',[AdminController::class,'fetchUsers'])->name('fetchUsers')->middleware('auth');
+
+Route::get('/admin_subscription',[AdminController::class,'fetchSubscription'])->name('fetchSubscription')->middleware('auth');
+Route::get('/admin_movies',[AdminController::class,'fetchMovies'])->name('fetchMovies')->middleware('auth');
+Route::get('/admin_series',[AdminController::class,'fetchSeries'])->name('fetchSeries')->middleware('auth');
+Route::get('/admin_watchlist',[AdminController::class,'fetchWatchlist'])->name('fetchWatchlist')->middleware('auth');
+
+Route::put('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
+
+Route::get('/movies',[MoviesController::class,'fetchmovies'])->name('movies');
+Route::get('/series',[SeriesController::class,'fetchseries'])->name('series');
+
+Route::get('/search',[UserController::class,'search'])->name('search');
+
 Route::post('/login',[UserController::class,'login']);
 
 Route::post('/signup',[UserController::class,'signup']);
@@ -61,10 +103,6 @@ Route::post('/logout',[UserController::class,'logout']);
 
 Route::post('/addwatchlist',[WatchlistController::class,'addwatchlist'])->name('addwatchlist');
 
-Route::get('/watchlist', [WatchlistController::class, 'fetchmovies'])->name('watchlist'); //pt1
-Route::get('/fetchmovies',[WatchlistController::class,'fetchmovies'])->name('fetchmovies');//pt2
+Route::post('/decision',[UserController::class,'decision'])->name('decision');
 
-Route::put('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
-
-Route::get('/movies',[MoviesController::class,'fetchmovies'])->name('movies');
-Route::get('/series',[SeriesController::class,'fetchseries'])->name('series');
+Route::post('/admin_go',[AdminController::class,'admin_go'])->name('admin_go');

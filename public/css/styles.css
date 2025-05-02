@@ -477,6 +477,7 @@ button.glider-next:hover {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 .grid-item img {
     width: 100%;
@@ -498,4 +499,109 @@ button.glider-next:hover {
 }
 .grid-item:hover .overlay {
     opacity: 1;
+}
+
+.subscription-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.subscription{
+    margin: 100px;
+    padding: 20px;  
+}
+
+
+/* Admin panel*/
+.admin-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.admin-options{
+    width:200px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: black
+}
+
+.table-details{
+    width:1000px;
+    padding-right: 20px;
+}
+.table{
+    width: 100%;
+    border-radius:10px;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 25px;
+}
+.thead-light {
+    background-color:#1a71a3;;
+}
+
+.th1{
+    background-color: #1a71a3;
+    color: white;
+    padding: 5px;
+}
+
+.td1{
+    background-color: #282828;
+    color: white;
+    padding: 5px;     
+}
+.admin_buttons{
+    font-weight: 700;
+    font-size: x-large;
+    font-family: 'Montserrat', sans-serif;;
+    border-color: #d4c9c9;
+    background-color: #1a71a3;
+    color: #ffffff;
+    width: 200px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+.admin_buttons:hover{
+    background-color: #1a71a3;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.input{
+
+    margin-left: 50px;
+    margin-top: 50px;
+    padding-left: 10px;
+}
+
+.input_bar{
+    width: 600px;
+    height:50px;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+.sb_plan{
+    font-family: 'Montserrat', sans-serif;;
+    border: none;
+    background-color: #1a71a3;
+    color: #ffffff;
+    width: 110px;
+    height: 55px;
+    border-radius: 5px;
+    margin-left: 70px;
+    margin-top: 5px;
 }

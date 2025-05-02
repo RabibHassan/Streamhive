@@ -11,8 +11,8 @@
     <header>
         <div class="logo">StreamHive</div>
 
-        <form class="search-bar" action="search_results.php" method="GET">
-            <input type="text" name="query" placeholder="Search for movies, series, or albums" required>
+        <form class="search-bar" action="/search" method="GET">
+            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
             <button type="submit">Search</button>
         </form>
 

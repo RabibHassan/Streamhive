@@ -11,8 +11,8 @@
     <header>
         <div class="logo">StreamHive</div>
 
-        <form class="search-bar" action="search_results.php" method="GET">
-            <input type="text" name="query" placeholder="Search for songs, artists, or albums" required>
+        <form class="search-bar" action="/search" method="GET">
+            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
             <button type="submit">Search</button>
         </form>
 
@@ -44,15 +44,16 @@
     
     <main>
         <section id="subscriptions">
-            <h1>Choose Your Subscription Plan</h1>             
+            <h1>Choose Your Subscription Plan</h1> 
+            <div class="subscription-container">            
                 <div class="subscription">
-                    <div class="s_type">
+                    <div class="s_type" style="background-color:#282828; padding-left:50px;padding-right:50px;padding-bottom:75px;padding-top:75px;border-radius: 10px;">
                         <h2>Individual</h2>
                         <p>Price: <strong>100 TAKA/month</strong></p>
                         <ul>
-                            <li>Ad-free Streaming</li>
-                            <li>Add to watchlist option</li>
-                            <li>Offline download</li>
+                            <li style="padding: 20px; text-align:center">Ad-free Streaming</li>
+                            <li style="padding: 20px; text-align:center">Add to watchlist option</li>
+                            <li style="padding: 20px; text-align:center">Offline download</li>
                         </ul>
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -69,14 +70,14 @@
                 </div>
 
                 <div class="subscription">
-                    <div class="s_type">
+                    <div class="s_type" style="background-color:#282828; padding:50px;border-radius: 10px;">
                         <h2>Family</h2>
                         <p>Price: <strong>250 TAKA/month</strong></p>
                         <ul>
-                            <li>Ad-free Streaming</li>
-                            <li>Add to watchlist option</li>
-                            <li>Offline download</li>
-                            <li>Family sharing</li>
+                            <li style="padding: 20px; text-align:center">Ad-free Streaming</li>
+                            <li style="padding: 20px; text-align:center">Add to watchlist option</li>
+                            <li style="padding: 20px; text-align:center">Offline download</li>
+                            <li style="padding: 20px; text-align:center">Family sharing</li>
                         </ul>
                         <form action="/subscription" method="POST">
                             @csrf
