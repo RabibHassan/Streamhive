@@ -60,7 +60,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -101,8 +105,8 @@
                     <th class="th1" scope="col">#Serial</th>
                     <th class="th1" scope="col">User's ID</th>
                     <th class="th1" scope="col">Username</th>
-                    <th class="th1" scope="col">Updated at</th>
-                    <th class="th1" scope="col">Created at</th>
+                    <th class="th1" scope="col">Payment Date</th>
+                    <th class="th1" scope="col">Expiry Date</th>
                     <th class="th1" scope="col">Subscription Status</th>
                     <th class="th1" scope="col">Change Subscription Status</th>
                 </tr>
@@ -113,13 +117,15 @@
                         <th class="th1" scope="row">{{$records->id}}</th>
                         <td class="td1">{{$records->users_id}}</td>
                         <td class="td1">{{$records->name}}</td>
-                        <td class="td1">{{$records->updated_at}}</td>
-                        <td class="td1">{{$records->created_at}}</td>
+                        <td class="td1" style="width: 150px;">{{$records->payment_date}}</td>
+                        <td class="td1" style="width: 150px;">{{$records->expiry_date}}</td>
                         <td class="td1">{{$records->status}}</td>
                         <td class="td1" style="width: 300px;">
                             <form action="/admin_change_status" method="POST">
                                 @csrf
                                 @method('PUT')
+                                <input type="hidden" name="payment_date" value="{{ now()->toDateString()}}">
+                                <input type="hidden" name="expiry_date" value="{{ now()->addMonth()->toDateString()}}">
                                 <input type="hidden" name="users_id" value="{{$records->users_id}}"> 
                                 <select name="status" id="status">
                                     <option value="free">Free</option>

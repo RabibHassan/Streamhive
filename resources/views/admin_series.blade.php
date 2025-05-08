@@ -22,7 +22,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -100,9 +104,6 @@
                 </div>
                 <div class="input">
                     <input class="input_bar" type="text" id="s_description" name="s_description" placeholder="Series Description" required>
-                </div>
-                <div class="input">
-                    <input class="input_bar" type="text" id="img" name="img" placeholder="enter image path like 'images/'" required>
                 </div>
                 <div class="input">
                     <input class="input_bar" type="file" id="img_url" name="img_url" accept="image/*" required>

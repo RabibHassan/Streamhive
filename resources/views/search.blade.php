@@ -42,7 +42,7 @@
         <div class="logo">StreamHive</div>
 
         <form class="search-bar" action="/search" method="GET">
-            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
+            <input type="text" name="search" value="" placeholder="Search for movies or series" required>
             <button type="submit">Search</button>
         </form>
 
@@ -53,6 +53,7 @@
                 <li><a href="{{route('series')}}">Series</a></li>
                 <li><a href="{{route('watchlist')}}">Watchlist</a></li>
                 <li><a href="{{route('subscription')}}">Subscriptions</a></li>
+                <li><a href="{{route('feedback')}}">Feedback</a></li> 
             </ul>
         </nav>
         <details class="user-menu">
@@ -61,7 +62,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -95,7 +100,7 @@
                     </details>
                 </div>
             </div>
-        @endforeach
+        @endforeach 
         @foreach($searchSeries as $record) 
         <div class="grid-item">
             <img src="{{ asset($record->img) }}" alt="">

@@ -9,7 +9,7 @@ class MoviesController extends Controller
 {
     public function fetchmovies(Request $request)
     {
-        $records=Movie::all();
-        return view('movies',compact('records'));
+        $records = Movie::all();
+        return view('movies', compact('records'));
     }
 }

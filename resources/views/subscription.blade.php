@@ -12,7 +12,7 @@
         <div class="logo">StreamHive</div>
 
         <form class="search-bar" action="/search" method="GET">
-            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
+            <input type="text" name="search" value="" placeholder="Search for movies and series" required>
             <button type="submit">Search</button>
         </form>
 
@@ -23,6 +23,7 @@
                 <li><a href="{{route('series')}}">Series</a></li>
                 <li><a href="{{route('watchlist')}}">Watchlist</a></li>
                 <li><a href="{{route('subscription')}}">Subscriptions</a></li>
+                <li><a href="{{route('feedback')}}">Feedback</a></li> 
             </ul>
         </nav>
 
@@ -32,7 +33,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -60,9 +65,8 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <form action="/subscription" method="POST">
+                        <form action="/payment" method="POST">
                             @csrf
-                            @method('PUT')
                             <input type="hidden"  name="status" value="Individual">
                             <button type="submit" class="s_plan">Select Individual Plan</button>
                         </form>
@@ -79,9 +83,8 @@
                             <li style="padding: 20px; text-align:center">Offline download</li>
                             <li style="padding: 20px; text-align:center">Family sharing</li>
                         </ul>
-                        <form action="/subscription" method="POST">
+                        <form action="/payment" method="POST">
                             @csrf
-                            @method('PUT')
                             <input type="hidden" name="status" value="Family">
                             <button type="submit" class="s_plan">Select Family Plan</button>
                         </form>

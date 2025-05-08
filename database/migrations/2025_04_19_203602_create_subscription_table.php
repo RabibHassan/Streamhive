@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('subscription', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('users_id')->constrained();
             $table->string('status')->default('Free');
+            $table->date('payment_date')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->timestamps(); 
         });
     }
 

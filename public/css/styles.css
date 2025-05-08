@@ -431,7 +431,7 @@ button.glider-next:hover {
     font-family: 'Montserrat', sans-serif;;;
     border: none;
     width: 110px;
-    height: 90px;
+    height: 50px;
 }
 .dropdown-button-item:hover{
     background-color: #f0f0f0;

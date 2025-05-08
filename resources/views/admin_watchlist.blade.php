@@ -23,7 +23,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tunify - Music Streaming Site</title>
+    <title>StreamHive</title>
     <link rel="stylesheet" href="{{asset('css/styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.css">
@@ -42,7 +42,7 @@
         <div class="logo">StreamHive</div>
 
         <form class="search-bar" action="{{route('search')}}" method="GET">
-            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
+            <input type="text" name="search" value="" placeholder="Search for movies and series" required>
             <button type="submit">Search</button>
         </form>
 
@@ -53,6 +53,7 @@
                 <li><a href="{{route('series')}}">Series</a></li>
                 <li><a href="{{route('watchlist')}}">Watchlist</a></li>
                 <li><a href="{{route('subscription')}}">Subscriptions</a></li>
+                <li><a href="{{route('feedback')}}">Feedback</a></li> 
             </ul>
         </nav>
 
@@ -62,7 +63,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -74,6 +79,32 @@
     <h2 class="section-title">Watch Popular Movies</h2>
         <div class="glider-container" id="homescroll">
             <div class="glider1">
+                <div class="slide">
+                    <img src="{{ asset('images/inception.jpeg') }}" alt="Image 1">
+                    <div class="overlay">
+                        <h1>Inception</h1>
+                        <p>A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Inception"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Inception">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
+                            </div>
+                        </details>
+                    </div>
+                </div>
                 <div class="slide">
                     <img src="{{ asset('images/thor.jpg') }}" alt="Image 1">
                     <div class="overlay">
@@ -90,7 +121,12 @@
                                     <input type="hidden" name="m_name" value="Thor"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Thor">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -111,7 +147,12 @@
                                     <input type="hidden" name="m_name" value="Avengers"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Avengers">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -132,7 +173,12 @@
                                     <input type="hidden" name="m_name" value="Guardian Of The Galaxy"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Guardian Of The Galaxy">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -153,7 +199,12 @@
                                     <input type="hidden" name="m_name" value="Joker"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Joker">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -174,7 +225,12 @@
                                     <input type="hidden" name="m_name" value="Ironman"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Ironman">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -195,7 +251,12 @@
                                     <input type="hidden" name="m_name" value="Ironman 2"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Ironman 2">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -216,7 +277,38 @@
                                     <input type="hidden" name="m_name" value="Ironman 3"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Ironman 3">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="{{ asset('images/spider-verse.jpg') }}" alt="Image 3">
+                    <div class="overlay">
+                        <h1>Spider-man</h1>
+                        <p>Spiderman: Into the spider verse featuring miles morales will have another movie following this</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Spider-man"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Spider-man">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
                             </div>
                         </details>
                     </div>
@@ -229,6 +321,32 @@
     <h2 class="section-title">Watch Popular Series</h2>
         <div class="glider-container" id="homescroll">
             <div class="glider2">
+                <div class="slide">
+                    <img src="{{ asset('images/Daredevil-Born_Again.jpg') }}" alt="Image 1">
+                    <div class="overlay">
+                        <h1>Daredevil-Born Again</h1>
+                        <p>A blind lawyer returns to fight crime as Daredevil, facing new enemies and inner demons in a gritty rebirth of his vigilante legacy.</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px, ">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="Daredevil-Born Again"> 
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Daredevil-Born Again">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form> 
+                            </div>
+                        </details>
+                    </div>
+                </div>
                 <div class="slide">
                     <img src="{{ asset('images/peaky_blinders.webp') }}" alt="Image 1">
                     <div class="overlay">
@@ -245,7 +363,12 @@
                                     <input type="hidden" name="m_name" value="Peaky Blinders"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Peaky Blinders">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form> 
                             </div>
                         </details>
                     </div>
@@ -266,7 +389,12 @@
                                     <input type="hidden" name="m_name" value="Dark"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Dark">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form> 
                             </div>
                         </details>
                     </div>
@@ -287,7 +415,12 @@
                                     <input type="hidden" name="m_name" value="Game of Thrones"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Game of Thrones">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form> 
                             </div>
                         </details>
                     </div>
@@ -308,7 +441,12 @@
                                     <input type="hidden" name="m_name" value="Mindhunter"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Mindhunter">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form> 
                             </div>
                         </details>
                     </div>
@@ -329,7 +467,12 @@
                                     <input type="hidden" name="m_name" value="Ozark"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
-                                <a href="profile.php">Watch now</a> 
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="Ozark">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form> 
                             </div>
                         </details>
                     </div>
@@ -350,7 +493,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
         <script>
             new Glider(document.querySelector('.glider1'), {
-                slidesToShow: 4,
+                slidesToShow: 5,
                 slidesToScroll: 1,
                 dots: '#dots',
                 draggable: true,
@@ -369,7 +512,7 @@
                     {
                         breakpoint: 1024,
                         settings: {
-                            slidesToShow: 4,
+                            slidesToShow: 5,
                             slidesToScroll: 1,
                         }
                     }
@@ -377,7 +520,7 @@
             });
 
             new Glider(document.querySelector('.glider2'), {
-                slidesToShow: 4,
+                slidesToShow: 5,
                 slidesToScroll: 1,
                 dots: '#dots',
                 draggable: true,
@@ -396,7 +539,7 @@
                     {
                         breakpoint: 1024,
                         settings: {
-                            slidesToShow: 4,
+                            slidesToShow: 5,
                             slidesToScroll: 1,
                         }
                     }
@@ -408,6 +551,12 @@
         <script>
             alert('You must be 18 or older to add movies to your watchlist.');
         </script>
+    @endif
+
+    @if(session('free'))
+    <script>
+        alert('You are subscribed to a free plan. Please upgrade to a paid plan to access this feature.');
+    </script>
     @endif
 
     <footer style="text-align: center; padding: 20px; background-color: #1a1a1a; color: white;margin-top: auto; bottom:0; width: 100%;">

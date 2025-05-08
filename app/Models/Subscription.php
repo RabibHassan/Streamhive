@@ -14,5 +14,7 @@ class Subscription extends Model
         'name',
         'status',
         'users_id',
+        'payment_date',
+        'expiry_date',
     ];
 }

@@ -25,22 +25,27 @@ class UserController extends Controller
         return redirect('/login');
     }
 
-    public function login(Request $request){
-        $incoming_fields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:5', 'max:20'], 
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-        
-        if (auth()->attempt(['email' => $incoming_fields['email'], 'password' => $incoming_fields['password']])){
+    
+        if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
-            if(auth()->user()->role=='admin'){
-                return view('/decisionpage');
-            }else{
-                return view('/UI');
+    
+            // Redirect based on the user's role
+            if (auth()->user()->role === 'admin') {
+                return redirect()->route('decisionpage');
+            } elseif (auth()->user()->role === 'user') {
+                return redirect()->route('UI');
             }
-        } else {
-            return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
         }
+    
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     public function logout(Request $request){

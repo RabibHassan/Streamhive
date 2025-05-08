@@ -8,8 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\WatchlistController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ContentManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +49,10 @@ Route::get('/subscription',function(){
     return view('subscription');
 })->name('subscription');
 
+Route::get('/payment',function(){
+    return view('payment');
+})->middleware('auth');
+
 Route::get('/movies',function(){
     return view('movies');
 })->name('movies');
@@ -54,9 +61,17 @@ Route::get('/series',function(){
     return view('series');
 })->name('series');
 
+Route::get('/choose_content',function(){
+    return view('choose_content');
+})->name('choose_content');
+
+Route::get('/playcontent',function(){
+    return view('playcontent');
+})->name('playcontent');
+
 Route::get('/decisionpage', function(){
     return view('decisionpage');
-})->middleware('auth');
+})->name('decisionpage')->middleware('auth');
 
 Route::get('/admin',function(){
     return view('admin');
@@ -78,6 +93,7 @@ Route::get('/admin_subscription',function(){
     return view('admin_subscription');
 })->middleware('auth');
 
+
 Route::get('/watchlist', [WatchlistController::class, 'fetchmovies'])->name('watchlist'); //pt1
 Route::get('/fetchmovies',[WatchlistController::class,'fetchmovies'])->name('fetchmovies');//pt2
 
@@ -93,25 +109,43 @@ Route::get('/series',[SeriesController::class,'fetchseries'])->name('series');
 
 Route::get('/search',[UserController::class,'search'])->name('search');
 
-Route::post('/login',[UserController::class,'login']);
+Route::post('/login',[UserController::class,'login'])->name('login');
 
-Route::post('/signup',[UserController::class,'signup']);
+Route::post('/signup',[UserController::class,'signup'])->name('signup');
 
-Route::post('/logout',[UserController::class,'logout']);
+Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::post('/addwatchlist',[WatchlistController::class,'addwatchlist'])->name('addwatchlist');
 
-Route::post('/decision',[UserController::class,'decision'])->name('decision');
+Route::post('/decision', [UserController::class, 'decision'])->name('decision')->middleware('auth');
 
 Route::post('/admin_go',[AdminController::class,'admin_go'])->name('admin_go');
 
 Route::post('/addmovie',[AdminController::class,'addmovie'])->name('addmovie'); 
 Route::post('/addseries',[AdminController::class,'addseries'])->name('addseries');
 
+Route::post('/access_content',[ContentManagerController::class,'access_content'])->name('access_content');
+Route::post('/gowatch',[ContentManagerController::class,'gowatch'])->name('gowatch');
+Route::post('/payment',[SubscriptionController::class,'payment'])->name('payment');
+
 Route::put('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
+
 Route::put('/admin_assign_role',[AdminController::class,'admin_assign_role'])->name('admin_assign_role');
 Route::put('/admin_change_status',[AdminController::class,'admin_change_status'])->name('admin_change_status');
 
 Route::delete('deletemovie/{id}',[AdminController::class,'deletemovie'])->name('deletemovie');
 Route::delete('deleteseries/{id}',[AdminController::class,'deleteseries'])->name('deleteseries');
 Route::delete('deleteuser/{id}',[AdminController::class,'deleteuser'])->name('deleteuser');
+
+
+
+#SHATIL
+Route::get('/feedback', [FeedbackController::class, 'showFeedbackForm'])->name('feedback');
+Route::post('/store', [FeedbackController::class, 'store'])->name('store');
+
+
+Route::get('/profile', function(){
+    return view('profile');
+})->name('profile');
+
+Route::put('/profile_update', [ProfileController::class, 'updateUsername'])->name('profile_update');

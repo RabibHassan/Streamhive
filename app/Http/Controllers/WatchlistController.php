@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Watchlist;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class WatchlistController extends Controller
@@ -24,6 +25,12 @@ class WatchlistController extends Controller
         if ($age < 18) {
             return redirect()->back()->with('underage', true);
         }
+
+        $subscription = Subscription::where('users_id', auth()->id())->first();
+        if ($subscription && $subscription->status === 'free') {
+            return redirect()->back()->with('free', true);
+        }
+
         Watchlist::create([
                 'name' => auth()->user()->name, 
                 'm_name' => $incoming_fields['m_name'], 

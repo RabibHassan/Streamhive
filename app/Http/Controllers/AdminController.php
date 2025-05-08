@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-use App\Models\Subscription;
 use App\Models\Movie;
 use App\Models\Series;
 use App\Models\Watchlist;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -60,8 +61,8 @@ class AdminController extends Controller
 
     public function admin_assign_role(Request $request){
         $incoming_fields = $request->validate([
-            'id' => 'required|exists:users,id', // Validate that the user ID exists
-            'status' => 'required|in:user,admin', // Validate the role
+            'id' => 'required|exists:users,id', 
+            'status' => 'required|in:user,admin', 
         ]);
     
         $user = User::find($incoming_fields['id']);
@@ -76,6 +77,8 @@ class AdminController extends Controller
 
     public function admin_change_status(Request $request){
         $incoming_fields = $request->validate([
+            'payment_date' => 'required|date',
+            'expiry_date' => 'required|date|after_or_equal:payment_date',
             'users_id' => 'required|exists:subscription,users_id', 
             'status' => 'required|in:free,individual,family', 
         ]);
@@ -83,26 +86,33 @@ class AdminController extends Controller
         $subscription = Subscription::where('users_id', $incoming_fields['users_id'])->first();
         if ($subscription) {
             $subscription->status = $incoming_fields['status']; 
+            $subscription->payment_date = $incoming_fields['payment_date'];
+            $subscription->expiry_date = $incoming_fields['expiry_date'];
             $subscription->save();
             return redirect('/admin_subscription')->with('message', 'Subscription Status Updated Successfully');
         } else {
             return redirect('/admin_subscription')->with('message', 'Subscription Not Found');
         }
     }
+    
     public function addmovie(Request $request){
-        $incoming_fields=$request->validate([
-            'id'=>'required',
-            'm_name'=>'required',
-            'm_description'=>'required',
-            'img'=>'required',
+        $incoming_fields = $request->validate([
+            'id' => 'required',
+            'm_name' => 'required',
+            'm_description' => 'required',
+            'img_url' => 'required|file|mimes:jpg,jpeg,png|max:2048', 
         ]);
 
+        $movie_name=$request->file('img_url')->getClientOriginalName();
+        $image_path='images/'.$movie_name;
+    
         Movie::create([
-            'id'=>$incoming_fields['id'],
-            'm_name'=>$incoming_fields['m_name'],
-            'm_description'=>$incoming_fields['m_description'],
-            'img'=>$incoming_fields['img'],
+            'id' => $incoming_fields['id'],
+            'm_name' => $incoming_fields['m_name'],
+            'm_description' => $incoming_fields['m_description'],
+            'img' => $image_path,
         ]);
+    
         return redirect('/admin_movies')->with('message', 'Movie Added Successfully');
     }
 
@@ -111,14 +121,17 @@ class AdminController extends Controller
             'id'=>'required',
             's_name'=>'required',
             's_description'=>'required',
-            'img'=>'required',
+            'img_url' => 'required|file|mimes:jpg,jpeg,png|max:2048', 
         ]);
+
+        $series_name=$request->file('img_url')->getClientOriginalName();
+        $image_path='images/'.$series_name;
 
         Series::create([
             'id'=>$incoming_fields['id'],
             's_name'=>$incoming_fields['s_name'],
             's_description'=>$incoming_fields['s_description'],
-            'img'=>$incoming_fields['img'],
+            'img'=>$image_path,
         ]);
         return redirect('/admin_series')->with('message', 'Series Added Successfully');
     }
@@ -126,8 +139,8 @@ class AdminController extends Controller
     public function deleteuser($id){
         // Delete related subscriptions first
         Subscription::where('users_id', $id)->delete();
-    
-        // Then delete the user
+
+
         $user = User::find($id);
         if ($user) {
             $user->delete();

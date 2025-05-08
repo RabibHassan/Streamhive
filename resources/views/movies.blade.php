@@ -12,7 +12,7 @@
         <div class="logo">StreamHive</div>
 
         <form class="search-bar" action="/search" method="GET">
-            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
+            <input type="text" name="search" value="" placeholder="Search for movies and series" required>
             <button type="submit">Search</button>
         </form>
 
@@ -23,6 +23,7 @@
                 <li><a href="{{route('series')}}">Series</a></li>
                 <li><a href="{{route('watchlist')}}">Watchlist</a></li>
                 <li><a href="{{route('subscription')}}">Subscriptions</a></li>
+                <li><a href="{{route('feedback')}}">Feedback</a></li> 
             </ul>
         </nav>
 
@@ -32,7 +33,11 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <form action="/profile" method="GET">
+                    @csrf
+                    <input type="hidden"> 
+                    <button type="submit" class="dropdown-button-item">Profile</button>
+                </form>
                 <form action="/logout" method="POST">
                     @csrf
                     <button type="submit" class="dropdown-button-item">Logout</button>
@@ -61,140 +66,29 @@
                                 <input type="hidden" name="m_name" value="{{$record->m_name}}"> 
                                 <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                             </form>
-                            <a href="profile.php">Watch now</a> 
+                            <form action="/access_content" method="POST">
+                                @csrf
+                                <input type="hidden" name="name" value="{{$record->m_name}}">
+                                <input type="hidden" name="type" value="movie"> 
+                                <button type="submit" class="dropdown-button-item">Watch Now</button>
+                            </form> 
                         </div>
                     </details>
                 </div>
             </div>
         @endforeach
     </div>
-        {{-- <div class="grid-item">
-            <img src="{{ asset('images/avengers.jpg') }}" alt="Avengers">
-            <div class="overlay">
-                <h1>Avengers</h1>
-                <p>Earth's mightiest heroes unite to stop an alien invasion led by Loki.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="Avengers"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/joker.jpg') }}" alt="Joker">
-            <div class="overlay">
-                <h1>Joker</h1>
-                <p>A troubled loner descends into madness and becomes the infamous clown-faced symbol of chaos.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="Joker"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/inception.jpeg') }}" alt="Inception">
-            <div class="overlay">
-                <h1>Inception</h1>
-                <p>A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="Inception"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/interstellar.jpeg') }}" alt="Interstellar">
-            <div class="overlay">
-                <h1>Interstellar</h1>
-                <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="Interstellar"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/dark_knight.jpg') }}" alt="The Dark Knight">
-            <div class="overlay">
-                <h1>The Dark Knight</h1>
-                <p>Batman faces his greatest challenge as the Joker wreaks havoc on Gotham City with his psychological warfare.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="The Dark Knight"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/matrix.jpeg') }}" alt="The Matrix">
-            <div class="overlay">
-                <h1>The Matrix</h1>
-                <p>A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="The Matrix"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/pulp_fiction.jpg') }}" alt="Pulp Fiction">
-            <div class="overlay">
-                <h1>Pulp Fiction</h1>
-                <p>The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="Pulp Fiction"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/shawshank_redemption.jpg') }}" alt="The Shawshank Redemption">
-            <div class="overlay">
-                <h1>The Shawshank Redemption</h1>
-                <p>Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="The Shawshank Redemption"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/godfather.jpg') }}" alt="The Godfather">
-            <div class="overlay">
-                <h1>The Godfather</h1>
-                <p>The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="The Godfather"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-        <div class="grid-item">
-            <img src="{{ asset('images/fight_club.jpeg') }}" alt="Fight Club">
-            <div class="overlay">
-                <h1>Fight Club</h1>
-                <p>An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much more.</p>
-                <form action="/addwatchlist" method="POST">
-                    @csrf
-                    <input type="hidden" name="m_name" value="Fight Club"> 
-                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
 
     @if (session('underage'))
         <script>
             alert('You must be 18 or older to add movies to your watchlist.');
         </script>
+    @endif
+
+    @if(session('free'))
+    <script>
+        alert('You are subscribed to a free plan. Please upgrade to a paid plan to access this feature.');
+    </script>
     @endif
 
     <footer style="text-align: center; padding: 20px; background-color: #1a1a1a; color: white;margin-top: 20px;bottom:0; width: 100%;">
