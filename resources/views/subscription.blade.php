@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscriptions - Tunify</title>
+    <title>Subscription</title>
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -48,55 +48,72 @@
     </header>
     
     <main>
-        <section id="subscriptions">
-            <h1>Choose Your Subscription Plan</h1> 
-            <div class="subscription-container">            
-                <div class="subscription">
-                    <div class="s_type" style="background-color:#282828; padding-left:50px;padding-right:50px;padding-bottom:75px;padding-top:75px;border-radius: 10px;">
-                        <h2>Individual</h2>
-                        <p>Price: <strong>100 TAKA/month</strong></p>
+        <div class="subscription-page">
+            <h2 class="section-title">Choose Your Subscription Plan</h2>
+            
+            @if (session('success'))
+                <div class="alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
+            <div class="plans-container">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Individual</h3>
+                        <div class="plan-price">
+                            <span class="price">100 TAKA</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="plan-features">
                         <ul>
-                            <li style="padding: 20px; text-align:center">Ad-free Streaming</li>
-                            <li style="padding: 20px; text-align:center">Add to watchlist option</li>
-                            <li style="padding: 20px; text-align:center">Offline download</li>
+                            <li><i class="fas fa-check"></i> Ad-free Streaming</li>
+                            <li><i class="fas fa-check"></i> Add to watchlist option</li>
+                            <li><i class="fas fa-check"></i> Offline download</li>
                         </ul>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
+                    </div>
+                    <div class="plan-action">
                         <form action="/payment" method="POST">
                             @csrf
-                            <input type="hidden"  name="status" value="Individual">
-                            <button type="submit" class="s_plan">Select Individual Plan</button>
+                            <input type="hidden" name="status" value="Individual">
+                            <button type="submit" class="primary-button1">Select Individual Plan</button>
                         </form>
                     </div>
                 </div>
-
-                <div class="subscription">
-                    <div class="s_type" style="background-color:#282828; padding:50px;border-radius: 10px;">
-                        <h2>Family</h2>
-                        <p>Price: <strong>250 TAKA/month</strong></p>
+                
+                <div class="plan-card featured">
+                    <div class="plan-badge">Popular</div>
+                    <div class="plan-header">
+                        <h3>Family</h3>
+                        <div class="plan-price">
+                            <span class="price">250 TAKA</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="plan-features">
                         <ul>
-                            <li style="padding: 20px; text-align:center">Ad-free Streaming</li>
-                            <li style="padding: 20px; text-align:center">Add to watchlist option</li>
-                            <li style="padding: 20px; text-align:center">Offline download</li>
-                            <li style="padding: 20px; text-align:center">Family sharing</li>
+                            <li><i class="fas fa-check"></i> Ad-free Streaming</li>
+                            <li><i class="fas fa-check"></i> Add to watchlist option</li>
+                            <li><i class="fas fa-check"></i> Offline download</li>
+                            <li><i class="fas fa-check"></i> Family sharing</li>
                         </ul>
+                    </div>
+                    <div class="plan-action">
                         <form action="/payment" method="POST">
                             @csrf
                             <input type="hidden" name="status" value="Family">
-                            <button type="submit" class="s_plan">Select Family Plan</button>
+                            <button type="submit" class="primary-button1">Select Family Plan</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer style="text-align: center; padding: 20px; background-color: #1a1a1a; color: white;margin-top: 20px;bottom:0; width: 100%;">
-        <p>StreamHive &copy; 2024</p>
-        <p>&copy; 2024 StreamHive. All rights reserved.</p>
+        <p>StreamHive &copy; 2025</p>
+        <p>&copy; 2025 StreamHive. All rights reserved.</p>
     </footer>
 </body>
 </html>

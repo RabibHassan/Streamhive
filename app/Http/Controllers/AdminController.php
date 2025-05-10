@@ -101,6 +101,7 @@ class AdminController extends Controller
             'm_name' => 'required',
             'm_description' => 'required',
             'img_url' => 'required|file|mimes:jpg,jpeg,png|max:2048', 
+            'liked' => 'required|integer|min:0',
         ]);
 
         $movie_name=$request->file('img_url')->getClientOriginalName();
@@ -111,6 +112,7 @@ class AdminController extends Controller
             'm_name' => $incoming_fields['m_name'],
             'm_description' => $incoming_fields['m_description'],
             'img' => $image_path,
+            'liked' => $incoming_fields['liked'],
         ]);
     
         return redirect('/admin_movies')->with('message', 'Movie Added Successfully');
@@ -122,6 +124,7 @@ class AdminController extends Controller
             's_name'=>'required',
             's_description'=>'required',
             'img_url' => 'required|file|mimes:jpg,jpeg,png|max:2048', 
+            'liked' => 'required|integer|min:0',
         ]);
 
         $series_name=$request->file('img_url')->getClientOriginalName();
@@ -132,12 +135,12 @@ class AdminController extends Controller
             's_name'=>$incoming_fields['s_name'],
             's_description'=>$incoming_fields['s_description'],
             'img'=>$image_path,
+            'liked'=>$incoming_fields['liked'],
         ]);
         return redirect('/admin_series')->with('message', 'Series Added Successfully');
     }
 
     public function deleteuser($id){
-        // Delete related subscriptions first
         Subscription::where('users_id', $id)->delete();
 
 
@@ -167,6 +170,37 @@ class AdminController extends Controller
             return redirect('/admin_series')->with('message', 'Series Deleted Successfully');
         } else {
             return redirect('/admin_series')->with('message', 'Series Not Found');
+        }
+    }
+
+    public function liked(Request $request){
+        $incoming_fields=$request->validate([
+            'type'=>'required|in:movie,series',
+            'name'=>'required',
+            'liked'=>'required',
+        ]);
+
+        if ($incoming_fields['type'] == 'movie') {
+            $movie = Movie::where('m_name', $incoming_fields['name'])->first();
+            if ($movie) {
+                $movie->liked = $movie->liked + 1; 
+                $movie->save();
+                return redirect()->back()->with('message', 'Movie Liked Successfully');
+            } else {
+                return redirect()->back()->with('message', 'Movie Not Found');
+            }
+        }
+        elseif ($incoming_fields['type'] == 'series') {
+            $series = Series::where('s_name', $incoming_fields['name'])->first();
+            if ($series) {
+                $series->liked = $series->liked + 1; 
+                $series->save();
+                return redirect()->back()->with('message', 'Series Liked Successfully');
+            } else {
+                return redirect()->back()->with('message', 'Series Not Found');
+            }
+        } else {
+            return redirect()->back()->with('message', 'Invalid Type');
         }
     }
 }

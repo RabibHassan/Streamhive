@@ -13,6 +13,7 @@ class Movie extends Model
         'id',
         'm_name',
         'm_description',
-        'img'
+        'img',
+        'liked'
     ];
 }

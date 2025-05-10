@@ -17,7 +17,7 @@
         }
 
         .header h1 {
-            color: #1a71a3;
+            color: #0896c7;
             font-size: 24px;
             margin-bottom: 5px;
         }
@@ -43,7 +43,7 @@
         }
 
         .details p strong {
-            color: #1a71a3;
+            color: #0896c7;
         }
 
         .footer {
@@ -67,7 +67,7 @@
         }
 
         table th {
-            background-color: #1a71a3;
+            background-color: #0896c7;
             color: white;
         }
 

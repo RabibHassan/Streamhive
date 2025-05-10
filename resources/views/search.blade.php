@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tunify - Music Streaming Site</title>
+    <title>StreamHive</title>
     <link rel="stylesheet" href="{{asset('css/styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.css">
@@ -62,11 +62,7 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <form action="/profile" method="GET">
-                    @csrf
-                    <input type="hidden"> 
-                    <button type="submit" class="dropdown-button-item">Profile</button>
-                </form>
+                <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -93,9 +89,23 @@
                             <form action="/addwatchlist" method="POST">
                                 @csrf
                                 <input type="hidden" name="m_name" value="{{$record->m_name}}"> 
+                                <input type="hidden" name="type" value="movie">
                                 <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                             </form>
-                            <a href="profile.php">Watch now</a> 
+                            <form action="/access_content" method="POST">
+                                @csrf
+                                <input type="hidden" name="name" value="{{$record->s_name}}">
+                                <input type="hidden" name="type" value="series"> 
+                                <button type="submit" class="dropdown-button-item">Watch Now</button>
+                            </form>
+                            <form action="/liked" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="liked" value="{{$record->liked}}"> 
+                                <input type="hidden" name="name" value="{{$record->m_name}}">
+                                <input type="hidden" name="type" value="movie">
+                                <button type="submit" class="dropdown-button-item">Like</button>
+                            </form>
                         </div>
                     </details>
                 </div>
@@ -115,10 +125,24 @@
                     <div class="dropdown">
                         <form action="/addwatchlist" method="POST">
                             @csrf
-                            <input type="hidden" name="m_name" value="{{$record->m_name}}"> 
+                            <input type="hidden" name="m_name" value="{{$record->s_name}}"> 
+                            <input type="hidden" name="type" value="series">
                             <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                         </form>
-                        <a href="profile.php">Watch now</a> 
+                        <form action="/access_content" method="POST">
+                            @csrf
+                            <input type="hidden" name="name" value="{{$record->s_name}}">
+                            <input type="hidden" name="type" value="series"> 
+                            <button type="submit" class="dropdown-button-item">Watch Now</button>
+                        </form>
+                        <form action="/liked" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="liked" value="{{$record->liked}}"> 
+                            <input type="hidden" name="name" value="{{$record->s_name}}">
+                            <input type="hidden" name="type" value="series">
+                            <button type="submit" class="dropdown-button-item">Like</button>
+                        </form>
                     </div>
                 </details>
             </div>

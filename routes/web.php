@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\WatchlistController;
@@ -93,6 +94,7 @@ Route::get('/admin_subscription',function(){
     return view('admin_subscription');
 })->middleware('auth');
 
+Route::get('/UI', [UserController::class, 'index'])->name('UI');
 
 Route::get('/watchlist', [WatchlistController::class, 'fetchmovies'])->name('watchlist'); //pt1
 Route::get('/fetchmovies',[WatchlistController::class,'fetchmovies'])->name('fetchmovies');//pt2
@@ -129,6 +131,7 @@ Route::post('/gowatch',[ContentManagerController::class,'gowatch'])->name('gowat
 Route::post('/payment',[SubscriptionController::class,'payment'])->name('payment');
 
 Route::put('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
+Route::put('liked',[AdminController::class,'liked'])->name('liked');
 
 Route::put('/admin_assign_role',[AdminController::class,'admin_assign_role'])->name('admin_assign_role');
 Route::put('/admin_change_status',[AdminController::class,'admin_change_status'])->name('admin_change_status');
@@ -144,8 +147,21 @@ Route::get('/feedback', [FeedbackController::class, 'showFeedbackForm'])->name('
 Route::post('/store', [FeedbackController::class, 'store'])->name('store');
 
 
-Route::get('/profile', function(){
-    return view('profile');
-})->name('profile');
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-Route::put('/profile_update', [ProfileController::class, 'updateUsername'])->name('profile_update');
+Route::delete('/watchlist/{id}', [WatchlistController::class, 'removeFromWatchlist'])->name('watchlist.remove');
+
+// Mishal
+// Route::get('/chat', [MessageController::class, 'index'])->name('chat');
+// Route::get('/messages/{user}', [MessageController::class, 'getMessages']);
+// Route::post('/messages', [App\Http\Controllers\MessageController::class, 'sendMessage']);
+// Route::get('/messages/unread/count', [MessageController::class, 'getUnreadCount']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat', [App\Http\Controllers\MessageController::class, 'index'])->name('chat');
+    Route::post('/messages', [App\Http\Controllers\MessageController::class, 'sendMessage']);
+    // This specific route must come AFTER any other /messages/* routes
+    Route::get('/messages/unread/count', [App\Http\Controllers\MessageController::class, 'getUnreadCount']);
+    Route::get('/messages/{user}', [App\Http\Controllers\MessageController::class, 'getMessages']);
+});

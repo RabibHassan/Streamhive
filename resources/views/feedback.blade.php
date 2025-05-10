@@ -21,19 +21,13 @@
         });
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        .hide {
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: opacity 0.5s ease, max-height 0.5s ease;
-        }
-        .show {
-            opacity: 1;
-            max-height: 200px;
-            transition: opacity 0.5s ease, max-height 0.5s ease;
+        main {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #1d1c1c;
         }
     </style>
 </head>
@@ -42,7 +36,7 @@
         <div class="logo">StreamHive</div>
 
         <form class="search-bar" action="{{route('search')}}" method="GET">
-            <input type="text" name="search" value="" placeholder="Search for songs, artists, or albums" required>
+            <input type="text" name="search" value="" placeholder="Search for movies or series" required>
             <button type="submit">Search</button>
         </form>
 
@@ -63,11 +57,7 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <form action="/profile" method="GET">
-                    @csrf
-                    <input type="hidden"> 
-                    <button type="submit" class="dropdown-button-item">Profile</button>
-                </form>
+                <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -106,6 +96,14 @@
                 <textarea name="comments" id="comments" class="form-control" rows="4" placeholder="Write your feedback here..." style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #444; border-radius: 4px; background-color: #333; color: #fff;"></textarea>
     
                 <button type="submit" class="btn-primary" style="width: 100%; padding: 0.75rem; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit Feedback</button>
+            </form>
+        </div>
+
+        <div style="margin-top:100px;text-align:center">
+            <h2>Need further help? Chat with us directly!</h2>
+            <form action="/chat" method="GET">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <button style="margin-right: 60px" type="submit" class="sb_plan">Live Chat</button>
             </form>
         </div>
     </main>

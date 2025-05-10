@@ -13,7 +13,8 @@ class Series extends Model
         'id',
         's_name',
         's_description',
-        'img'
+        'img',
+        'liked'
     ];
 
 }

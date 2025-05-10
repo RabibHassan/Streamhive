@@ -77,4 +77,12 @@ class UserController extends Controller
             return redirect('/admin');
         }
     }
+
+    public function index(){
+        // Fetch top 10 most liked movies and series
+        $topMovies = Movie::orderBy('liked', 'desc')->take(10)->get();
+        $topSeries = Series::orderBy('liked', 'desc')->take(10)->get();
+
+        return view('UI', compact('topMovies', 'topSeries'));
+    }
 }

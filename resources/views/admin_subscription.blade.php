@@ -29,7 +29,7 @@
             transition: opacity 0.3s ease;
         }
         .assign-button-item{
-            background-color: #1a71a3;
+            background-color: #0896c7;
             color: white;
             border: none;
             font-family: 'Montserrat', sans-serif;
@@ -42,7 +42,7 @@
         }
         .assign-button-item:hover {
             background-color: #f0f0f0;
-            color:#1a71a3;
+            color:#0896c7;
             opacity: 0.8;
             transition: opacity 0.3s ease;
         }

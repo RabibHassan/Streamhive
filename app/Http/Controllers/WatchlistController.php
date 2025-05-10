@@ -12,6 +12,7 @@ class WatchlistController extends Controller
     {
         $incoming_fields= $request->validate([
             'm_name' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
         ]);
         $exists = Watchlist::where('users_id', auth()->id())
         ->where('m_name', $incoming_fields['m_name'])
@@ -34,6 +35,7 @@ class WatchlistController extends Controller
         Watchlist::create([
                 'name' => auth()->user()->name, 
                 'm_name' => $incoming_fields['m_name'], 
+                'type' => $incoming_fields['type'],
                 'users_id' => auth()->id(), 
                 'users_age' => auth()->user()->age,
             ]);
@@ -43,5 +45,18 @@ class WatchlistController extends Controller
     public function fetchmovies(Request $request){
         $records = Watchlist::where('users_id', auth()->id())->get();
         return view('watchlist',compact('records'));
+    }
+
+    public function removeFromWatchlist($id){
+        $watchlistItem = Watchlist::where('id', $id)
+            ->where('users_id', auth()->id())
+            ->first();
+
+        if ($watchlistItem) {
+            $watchlistItem->delete();
+            return redirect()->back()->with('success', 'Removed from your watchlist!');
+        }
+
+        return redirect()->back()->with('error', 'Movie not found in your watchlist.');
     }
 }

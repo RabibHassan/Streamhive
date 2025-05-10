@@ -14,6 +14,7 @@ class Watchlist extends Model
     protected $fillable = [
         'name',
         'm_name',
+        'type',
         'users_id',
         'users_age',
     ];

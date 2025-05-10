@@ -38,11 +38,7 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <form action="/profile" method="GET">
-                    @csrf
-                    <input type="hidden"> 
-                    <button type="submit" class="dropdown-button-item">Profile</button>
-                </form>
+                <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -95,7 +91,7 @@
     </main>
 
     <footer>
-        <p>StreamHive &copy; 2024</p>
+        <p>StreamHive &copy; 2025</p>
     </footer>
 </body>
 </html>

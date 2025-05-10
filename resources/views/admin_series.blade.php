@@ -68,6 +68,7 @@
                     <th class="th1" scope="col">#Serial</th>
                     <th class="th1" scope="col">Series Name</th>
                     <th class="th1" scope="col">Series Description</th>
+                    <th class="th1" scope="col">Likes</th>
                     <th class="th1" scope="col">Poster</th>
                     <th class="th1" scope="col">Remove Series</th>
                 </tr>
@@ -78,6 +79,7 @@
                         <th class="th1" scope="row">{{$records->id}}</th>
                         <td class="td1">{{$records->s_name}}</td>
                         <td class="td1">{{$records->s_description}}</td>
+                        <td class="td1">{{$records->liked}}</td>
                         <td class="td1">
                             <img src="{{asset($records->img)}}" alt="Movie Poster" style="width: 150px; height: 150px;">
                         </td>
@@ -104,6 +106,9 @@
                 </div>
                 <div class="input">
                     <input class="input_bar" type="text" id="s_description" name="s_description" placeholder="Series Description" required>
+                </div>
+                <div class="input">
+                    <input class="input_bar" type="text" id="m_link" name="liked" placeholder="Set Popularity likes" required>
                 </div>
                 <div class="input">
                     <input class="input_bar" type="file" id="img_url" name="img_url" accept="image/*" required>

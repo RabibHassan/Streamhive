@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscriptions - Tunify</title>
+    <title>Payment</title>
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
@@ -73,13 +73,13 @@
         <h2>Buy the {{$status}} subscription for BDT {{$cost}} only.</h2>
         <div class="payment-container">
             <h1>Payment Details</h1>
-            <p style="color:#1a71a3; text-align:left; margin-top:10px;">Enter your VISA/AMEX Card Number</p>
+            <p style="color:#0896c7; text-align:left; margin-top:10px;">Enter your VISA/AMEX Card Number</p>
             <input class="bar" type="text" id="card-number" placeholder="Card Number" required pattern="\d{16}" title="Card number must 16 digits">
-            <p style="color:#1a71a3; text-align:left; margin-top:10px;">Enter your name on Card</p>
+            <p style="color:#0896c7; text-align:left; margin-top:10px;">Enter your name on Card</p>
             <input class="bar"  type="text" id="card-name" placeholder="Name" required>
-            <p style="color:#1a71a3; text-align:left; margin-top:10px;">Enter the expiry-date of your card</p>
+            <p style="color:#0896c7; text-align:left; margin-top:10px;">Enter the expiry-date of your card</p>
             <input class="bar" type="text" id="expiry-date" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/\d{2}" title="Expiry date must be in MM/YY format">
-            <p style="color:#1a71a3; text-align:left; margin-top:10px;">Enter the 4 digit pin on your card</p>
+            <p style="color:#0896c7; text-align:left; margin-top:10px;">Enter the 4 digit pin on your card</p>
             <input class="bar" type="text" id="cvv" placeholder="CVV" required pattern="\d{4}" title="Card pin must be 4 digits">
             <form action="/subscription" method="POST">
                 @csrf

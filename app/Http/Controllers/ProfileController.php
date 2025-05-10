@@ -5,41 +5,60 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    // Show the profile page
     public function showProfile()
     {
-        $user = Auth::user(); // Get the currently authenticated user
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
         return view('profile', compact('user'));
     }
 
-    // Update the name field
-    public function updateUsername(Request $request)
+    public function update(Request $request)
     {
-        // Validate the name field
-        $incoming_fields=$request->validate([
-            'name' => 'required|string|max:255|unique:users,name', // Ensure the name is unique
+        // Basic validation for name
+        $request->validate([
+            'name' => 'required|string|max:255',
         ]);
 
-        // Get the authenticated user
-        $user = Auth::user(); // Get the currently authenticated user
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 
-        // Update the name field
-        // $user->name = $request->input('name');
+        // Update name
+        $user->name = $request->input('name');
 
-        // Save the updated name
-        User::updateOrCreate([
-            'name' => $incoming_fields['name'],
-            'email'=> $user->email,
-            'age'=> $user->age,
-            'password'=> $user->password,
-            'role'=> $user->role,
-        ]);
-        // $user->save(); // Save the changes to the database
+        // Check if password update is requested
+        if ($request->filled('new_password')) {
+            // Validate password fields only if new password is provided
+            $request->validate([
+                'old_password' => 'required|string',
+                'new_password' => 'required|string|min:6|confirmed',
+            ]);
 
-        // Redirect back with a success message
-        return redirect()->route('profile')->with('success', 'Name updated successfully!');
+            // Verify old password
+            if (!Hash::check($request->input('old_password'), $user->password)) {
+                return back()->withErrors(['old_password' => 'The old password is incorrect.']);
+            }
+
+            // Update password
+            $user->password = Hash::make($request->input('new_password'));
+        }
+
+        // Save changes
+        $user->save();
+
+        // Always logout user after any update
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect to login with appropriate message
+        $message = $request->filled('new_password') 
+            ? 'Profile and password updated successfully. Please login again.'
+            : 'Name updated successfully. Please login again.';
+
+        return redirect('/login')->with('success', $message);
     }
 }

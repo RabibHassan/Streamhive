@@ -51,20 +51,26 @@ class ContentManagerController extends Controller
             'name' => 'required',
             'type' => 'required',
         ]);
+
         $type = $incoming_fields['type'];
         $name = $incoming_fields['name'];
+        $base_name = str_replace(' ', '_', pathinfo($name, PATHINFO_FILENAME));
 
         if ($type == 'movie') {
-            $video_path = "{$name}";
+            $video_path = "{$name}"; 
+            $subtitleUrl=asset("subtitles/movies/{$base_name}.vtt");
         }
         elseif ($type == 'series') {
             $video_path = "{$name}";
+            $subtitleUrl=asset("subtitles/series/{$base_name}.vtt");
         } else {
             return redirect()->back()->with('message', 'Invalid content type');
         }
+
         if (Storage::disk('s3')->exists($video_path)) {
-            $videoUrl = Storage::disk('s3')->temporaryUrl($video_path, now()->addMinutes(5));
-            return view('playcontent', compact('videoUrl'));
+            $videoUrl = Storage::disk('s3')->temporaryUrl($video_path, now()->addMinutes(30));;
+
+            return view('playcontent', compact('videoUrl', 'subtitleUrl'));
         } else {
             return redirect()->back()->with('message', "Video not found at path: {$video_path}");
         }

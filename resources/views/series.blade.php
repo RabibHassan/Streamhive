@@ -33,7 +33,7 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>
+                <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>
                 <form action="/logout" method="POST">
                     @csrf
                     <button type="submit" class="dropdown-button-item">Logout</button>
@@ -58,6 +58,7 @@
                             <form action="/addwatchlist" method="POST">
                                 @csrf
                                 <input type="hidden" name="m_name" value="{{$record->s_name}}"> 
+                                <input type="hidden" name="type" value="series">
                                 <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                             </form>
                             <form action="/access_content" method="POST">
@@ -65,7 +66,15 @@
                                 <input type="hidden" name="name" value="{{$record->s_name}}">
                                 <input type="hidden" name="type" value="series"> 
                                 <button type="submit" class="dropdown-button-item">Watch Now</button>
-                            </form> 
+                            </form>
+                            <form action="/liked" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="liked" value="{{$record->liked}}"> 
+                                <input type="hidden" name="name" value="{{$record->s_name}}">
+                                <input type="hidden" name="type" value="series">
+                                <button type="submit" class="dropdown-button-item">Like</button>
+                            </form>
                         </div>
                     </details>
                 </div>
@@ -74,8 +83,8 @@
     </div>
 
     <footer style="text-align: center; padding: 20px; background-color: #1a1a1a; color: white;margin-top: 20px;bottom:0; width: 100%;">
-        <p>StreamHive &copy; 2024</p>
-        <p>&copy; 2024 StreamHive. All rights reserved.</p>
+        <p>StreamHive &copy; 2025</p>
+        <p>&copy; 2025 StreamHive. All rights reserved.</p>
     </footer>
     @if (session('underage'))
         <script>

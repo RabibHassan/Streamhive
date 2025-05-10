@@ -63,11 +63,7 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <form action="/profile" method="GET">
-                    @csrf
-                    <input type="hidden"> 
-                    <button type="submit" class="dropdown-button-item">Profile</button>
-                </form>
+                <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
@@ -93,6 +89,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Inception"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -119,6 +116,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Thor"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -145,6 +143,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Avengers"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -171,6 +170,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Guardian Of The Galaxy"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -197,6 +197,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Joker"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -223,6 +224,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Ironman"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -249,6 +251,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Ironman 2"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -275,6 +278,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Ironman 3"> 
+                                    <input type="hidden" name="type" value="movie"> 
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -301,6 +305,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Spider-man"> 
+                                    <input type="hidden" name="type" value="movie">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -335,6 +340,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Daredevil-Born Again"> 
+                                    <input type="hidden" name="type" value="series">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -361,6 +367,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Peaky Blinders"> 
+                                    <input type="hidden" name="type" value="series">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -387,6 +394,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Dark"> 
+                                    <input type="hidden" name="type" value="series">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -413,6 +421,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Game of Thrones"> 
+                                    <input type="hidden" name="type" value="series">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -439,6 +448,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Mindhunter"> 
+                                    <input type="hidden" name="type" value="series">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -465,6 +475,7 @@
                                 <form action="/addwatchlist" method="POST">
                                     @csrf
                                     <input type="hidden" name="m_name" value="Ozark"> 
+                                    <input type="hidden" name="type" value="series">
                                     <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
                                 </form>
                                 <form action="/access_content" method="POST">
@@ -488,6 +499,82 @@
             <a href="#" class="dropdown-item">Add to Watchlist</a>
         </div>
     </details>
+
+    <h2 class="section-title">Top 10 Movies</h2>
+    <div class="glider-container" id="top10movies">
+        <div class="glider3">
+            @foreach ($topMovies as $movie)
+                <div class="slide">
+                    <img src="{{ asset($movie->img) }}" alt="{{ $movie->m_name }}">
+                    <div class="overlay">
+                        <h1>{{ $movie->m_name }}</h1>
+                        <p>{{ $movie->m_description }}</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px;">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="{{ $movie->m_name }}"> 
+                                    <input type="hidden" name="type" value="movie">
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="{{ $movie->m_name }}">
+                                    <input type="hidden" name="type" value="movie"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <button class="glider-prev glider3-prev">«</button>
+        <button class="glider-next glider3-next">»</button>
+        <div id="dots3"></div>
+    </div>
+    
+    <h2 class="section-title">Top 10 Series</h2>
+    <div class="glider-container" id="top10series">
+        <div class="glider4">
+            @foreach ($topSeries as $series)
+                <div class="slide">
+                    <img src="{{ asset($series->img) }}" alt="{{ $series->s_name }}">
+                    <div class="overlay">
+                        <h1>{{ $series->s_name }}</h1>
+                        <p>{{ $series->s_description }}</p>
+                        <details class="user-menu">
+                            <summary>
+                                <button id="visible1" class="option-icon" style="font-size:15px;">Options</button>
+                                <span class="dropdown-icon">&#x25BC;</span>
+                            </summary>
+                            <div class="dropdown">
+                                <form action="/addwatchlist" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="m_name" value="{{ $series->s_name }}"> 
+                                    <input type="hidden" name="type" value="series">
+                                    <button type="submit" class="dropdown-button-item">Add to Watchlist</button>
+                                </form>
+                                <form action="/access_content" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="{{ $series->s_name }}">
+                                    <input type="hidden" name="type" value="series"> 
+                                    <button type="submit" class="dropdown-button-item">Watch Now</button>
+                                </form>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <button class="glider-prev glider4-prev">«</button>
+        <button class="glider-next glider4-next">»</button>
+        <div id="dots4"></div>
+    </div>
 
     <section class="glider-section">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
@@ -518,8 +605,59 @@
                     }
                 ]
             });
-
             new Glider(document.querySelector('.glider2'), {
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                dots: '#dots',
+                draggable: true,
+                arrows: {
+                    prev: '.glider-prev',
+                    next: '.glider-next'
+                },
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 5,
+                            slidesToScroll: 1,
+                        }
+                    }
+                ]
+            });
+            new Glider(document.querySelector('.glider3'), {
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                dots: '#dots',
+                draggable: true,
+                arrows: {
+                    prev: '.glider-prev',
+                    next: '.glider-next'
+                },
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 5,
+                            slidesToScroll: 1,
+                        }
+                    }
+                ]
+            });
+            new Glider(document.querySelector('.glider4'), {
                 slidesToShow: 5,
                 slidesToScroll: 1,
                 dots: '#dots',
@@ -559,10 +697,27 @@
     </script>
     @endif
 
+    @auth
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/681e5d9c5fa91f190c49988f/1iqr9rbtg';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    @endauth
+
     <footer style="text-align: center; padding: 20px; background-color: #1a1a1a; color: white;margin-top: auto; bottom:0; width: 100%;">
-        <p>StreamHive &copy; 2024</p>
-        <p>&copy; 2024 StreamHive. All rights reserved.</p>
+        <p>StreamHive &copy; 2025</p>
+        <p>&copy; 2025 StreamHive. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
 

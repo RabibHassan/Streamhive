@@ -10,6 +10,13 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
     <style>
+        video::cue {
+            background: rgb(0, 0, 0,0.3);
+            color: white; 
+            font-size: 40px; 
+            padding: 5px; 
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -38,11 +45,8 @@
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
-                <a href="profile.php">Profile</a>                <form action="/profile" method="GET">
-                    @csrf
-                    <input type="hidden"> 
-                    <button type="submit" class="dropdown-button-item">Profile</button>
-                </form>                <form action="/logout" method="POST">
+                <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>        
+                <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
                     <button type="submit" class="dropdown-button-item">Logout</button>
@@ -55,8 +59,9 @@
         <h2 class="section-title">Now Playing</h2>
         <div class="video-container">
             @if(isset($videoUrl))
-                <video controls controlsList="nodownload" width="100%" style="max-width: 800px; margin: 0 auto; display: block;">
-                    <source src="{{ $videoUrl }}" type="video/mp4">
+                <video controls width="100%" style="max-width: 800px; margin: 0 auto; display: block;">
+                    <source src="{{$videoUrl}}" type="video/mp4">
+                    <track src="{{$subtitleUrl}}" kind="subtitles" srclang="en" label="English" default>
                     Your browser does not support the video tag.
                 </video>
             @else
@@ -66,7 +71,7 @@
     </main>
 
     <footer>
-        <p>StreamHive &copy; 2024</p>
+        <p>StreamHive &copy; 2025</p>
     </footer>
 </body>
 </html>
