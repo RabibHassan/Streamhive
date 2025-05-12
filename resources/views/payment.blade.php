@@ -133,7 +133,7 @@
                 <input type="hidden" name="status" value="{{$status}}">
                 <input type="hidden" name="payment_date" value="{{$payment_date}}">
                 <input type="hidden" name="expiry_date" value="{{$expiry_date}}">
-                <button style="margin-top:30px;" type="submit" class="s_plan">Buy Subscription</button>
+                <button style="margin-top:5px" type="submit" class="s_plan">Buy Subscription</button>
             </form>
         </div>
         <div class="coupon">
