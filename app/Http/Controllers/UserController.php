@@ -34,6 +34,13 @@ class UserController extends Controller
     
         if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
+            $login_at=now();
+            $user = auth()->user();
+            if ($user instanceof User) {
+                $user->recent_login=$login_at->format('Y-m-d H:i:s');
+                $user->save();
+            }
+
     
             // Redirect based on the user's role
             if (auth()->user()->role === 'admin') {
@@ -48,7 +55,33 @@ class UserController extends Controller
         ]);
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
+        $logout_at = now();
+        $user = auth()->user();
+
+        if ($user instanceof User) {
+            $login_at = $user->recent_login ? \Carbon\Carbon::parse($user->recent_login) : null;
+            if ($login_at) {
+                $sessionDuration = $login_at->diff($logout_at); 
+                $sessionSeconds = ($sessionDuration->h * 3600) + ($sessionDuration->i * 60) + $sessionDuration->s;
+
+                $existingUsageTime = \Carbon\Carbon::createFromFormat('H:i:s', $user->usage_time);
+                $existingSeconds = ($existingUsageTime->hour * 3600) + ($existingUsageTime->minute * 60) + $existingUsageTime->second;
+
+                $totalSeconds = $sessionSeconds + $existingSeconds;
+
+                $hours = floor($totalSeconds / 3600);
+                $minutes = floor(($totalSeconds % 3600) / 60);
+                $seconds = $totalSeconds % 60;
+                $updatedUsageTime = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+
+                $user->usage_time = $updatedUsageTime;
+                $user->recent_logout = $logout_at->format('Y-m-d H:i:s');
+                $user->save();
+            }
+        }
+
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

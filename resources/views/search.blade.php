@@ -94,8 +94,8 @@
                             </form>
                             <form action="/access_content" method="POST">
                                 @csrf
-                                <input type="hidden" name="name" value="{{$record->s_name}}">
-                                <input type="hidden" name="type" value="series"> 
+                                <input type="hidden" name="name" value="{{$record->m_name}}">
+                                <input type="hidden" name="type" value="movie"> 
                                 <button type="submit" class="dropdown-button-item">Watch Now</button>
                             </form>
                             <form action="/liked" method="POST">

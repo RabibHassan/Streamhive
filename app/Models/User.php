@@ -23,6 +23,9 @@ class User extends Authenticatable
         'age',
         'password',
         'role',
+        'recent_login',
+        'recent_logout',
+        'usage_time'
     ];
 
     /**

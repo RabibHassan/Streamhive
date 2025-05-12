@@ -4,6 +4,7 @@ use App\Models\Series;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MoviesController;
@@ -151,6 +152,8 @@ Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::delete('/watchlist/{id}', [WatchlistController::class, 'removeFromWatchlist'])->name('watchlist.remove');
+
+Route::get('/generate-report', [PdfController::class, 'generateUserReport'])->name('generate.report');
 
 // Mishal
 // Route::get('/chat', [MessageController::class, 'index'])->name('chat');

@@ -20,7 +20,7 @@
         <form action="/signup" method="POST">
             @csrf
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="First and last name" required>
+            <input type="text" id="name" name="name" placeholder="User name" required>
             
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Enter your email" required>

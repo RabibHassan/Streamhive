@@ -59,11 +59,13 @@
 
         <details class="user-menu">
             <summary>
+                <span style="margin-right:20px" class="user-name">{{ Auth::user()->name }}</span>
                 <img src="{{asset('images/user-icon.png')}}" alt="User" class="user-icon">
                 <span class="dropdown-icon">&#x25BC;</span>
             </summary>
             <div class="dropdown">
                 <a href="{{ route('profile') }}" class="dropdown-button-item">Profile</a>
+                <a style="height:65px" href="{{ route('generate.report') }}" class="dropdown-button-item">Download Report</a>
                 <form action="/logout" method="POST">
                     @csrf
                     <input type="hidden"> 
