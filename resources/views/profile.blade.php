@@ -88,10 +88,9 @@
             </div>
         @endif
 
-        <form action="{{ route('profile.update') }}" method="POST">
+        <form action="{{route('profile.update')}}" method="POST">
             @csrf
             @method('PUT')
-
             <div class="form-group">
                 <label for="name">Change Name</label>
                 <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required>

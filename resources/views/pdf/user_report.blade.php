@@ -113,7 +113,7 @@
             @if($subscription && $subscription->status != 'Free')
                 <p><strong>Payment Date:</strong> {{ $subscription->payment_date }}</p>
                 <p><strong>Expiry Date:</strong> {{ $subscription->expiry_date }}</p>
-                <p><strong>Cost:</strong> {{ $subscription->status === 'Individual' ? '100 BDT' : '250 BDT' }}</p>
+                {{-- <p><strong>Cost:</strong> {{ $subscription->status === 'Individual' ? '100 BDT' : '250 BDT' }}</p> --}}
             @endif
         </div>
     </div>

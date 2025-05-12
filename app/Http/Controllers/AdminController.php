@@ -142,8 +142,7 @@ class AdminController extends Controller
 
     public function deleteuser($id){
         Subscription::where('users_id', $id)->delete();
-
-
+        
         $user = User::find($id);
         if ($user) {
             $user->delete();
